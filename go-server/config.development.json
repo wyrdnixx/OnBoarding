@@ -1,0 +1,9 @@
+{
+
+	"ApiPort"  : "0.0.0.0:5000",	
+    "DBHost": "server-database",
+	"DBPort" : "3306",
+	"DBUser" : "root",
+	"DBPassword" : "mysqlroot",
+	"DBName" : "appdb"
+}
