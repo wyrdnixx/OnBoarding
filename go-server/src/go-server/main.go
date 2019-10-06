@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	 "github.com/wyrdnixx/go-server/src/go-server/dbapi"
-	 "github.com/wyrdnixx/go-server/src/go-server/types"
-	 "github.com/wyrdnixx/go-server/src/go-server/utils"
 
+	"github.com/wyrdnixx/go-server/src/go-server/dbapi"
+	"github.com/wyrdnixx/go-server/src/go-server/types"
+	"github.com/wyrdnixx/go-server/src/go-server/utils"
 )
-
 
 var AppConfig = types.Configuration{}
 
@@ -20,52 +19,54 @@ var AppConfig = types.Configuration{}
 
 func defaultHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Fprint(w, "Nothing here... use API links")
-	utils.LogMsg(2,"/ DefaultHandler was requested from " + req.RemoteAddr + " \n: "+ req.URL.Path + " : Nothing here... Wrong api call...")
-	
+	utils.LogMsg(2, "/ DefaultHandler was requested from "+req.RemoteAddr+" \n: "+req.URL.Path+" : Nothing here... Wrong api call...")
+
 }
 
 func toggleHandler(w http.ResponseWriter, req *http.Request) {
 	utils.EnableCors(&w)
-	
+
 	//fmt.Fprint(w, "Nothing here... use API links")
-	utils.LogMsg(4, req.URL.Path + " was requested from " + req.RemoteAddr )
+	utils.LogMsg(4, req.URL.Path+" was requested from "+req.RemoteAddr)
 	dbapi.ApiToggleHandler(w, req, &AppConfig)
-	
+
 }
 
-func companysHandler(w http.ResponseWriter, req *http.Request) {	
-	
+func companysHandler(w http.ResponseWriter, req *http.Request) {
+
 	utils.EnableCors(&w)
-	
-	utils.LogMsg(3,"/api/Companys was requested...")
+
+	utils.LogMsg(3, "/api/Companys was requested...")
 	//dbapi.DBGetCompanys(w, &AppConfig)
-	 dbapi.ApiCompanysHandler(w, req, &AppConfig)
+	dbapi.ApiCompanysHandler(w, req, &AppConfig)
 }
 
-func departmentsHandler(w http.ResponseWriter, req *http.Request) {	
-	
-	utils.EnableCors(&w)	
-	utils.LogMsg(3,"/api/Departments was requested...")
+func departmentsHandler(w http.ResponseWriter, req *http.Request) {
+
+	utils.EnableCors(&w)
+	utils.LogMsg(3, "/api/Departments was requested...")
 	//dbapi.DBGetCompanys(w, &AppConfig)
-	 dbapi.ApiDepartmentsHandler(w, req, &AppConfig)
+	dbapi.ApiDepartmentsHandler(w, req, &AppConfig)
+}
+
+func processorsHandler(w http.ResponseWriter, req *http.Request) {
+
+	utils.EnableCors(&w)
+	utils.LogMsg(3, "/api/Processors was requested...")
+	dbapi.ApiProcessorsHandler(w, req, &AppConfig)
 }
 
 func main() {
-	http.HandleFunc("/", defaultHandler)	
-	http.HandleFunc("/api/Companys", companysHandler )
-	http.HandleFunc("/api/Departments", departmentsHandler )
-	
+	http.HandleFunc("/", defaultHandler)
+	http.HandleFunc("/api/Companys", companysHandler)
+	http.HandleFunc("/api/Departments", departmentsHandler)
+	http.HandleFunc("/api/Processors", processorsHandler)
 
-	http.HandleFunc("/api/toggle", toggleHandler )
-
+	http.HandleFunc("/api/toggle", toggleHandler)
 
 	AppConfig = utils.ReadConfig()
-	
-	
-	utils.LogMsg(3," Api Server listening on :" + AppConfig.ApiPort)
-	log.Fatal(http.ListenAndServe(AppConfig.ApiPort, nil))	
-		
+
+	utils.LogMsg(3, " Api Server listening on :"+AppConfig.ApiPort)
+	log.Fatal(http.ListenAndServe(AppConfig.ApiPort, nil))
 
 }
-
-

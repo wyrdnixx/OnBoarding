@@ -67,8 +67,18 @@ class DBService {
             });
   }
 
-        
-    
+  static DBAddProcessor(data){
+    const callUrl = apiURL + "/Processors"
+    return axios.post(callUrl, {
+      NewDepartment: data
+          }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+          });
+}
+  
+
 
 
 
@@ -144,18 +154,7 @@ class DBService {
     //           });
     // }
 
-    static AddProcessor(newProcessorName, newProcessorMail){
-        const url = window.location.protocol + "//"+ window.location.hostname +":8081/api/AddProcessor"        
-        
-        return axios.post(url, {
-            newProcessorName,
-            newProcessorMail
-        },{
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    }
+ 
     
     static AddItem(itemText, itemDepartment, itemProcessor, itemType) {
     const url = window.location.protocol + "//" + window.location.hostname + ":8081" +

@@ -1,6 +1,5 @@
 package types
 
-
 // Configuration -  Allgemeine Config
 type Configuration struct {
 	ApiPort    string
@@ -14,45 +13,48 @@ type Configuration struct {
 
 type ToggleEntry struct {
 	Table   string `json:"table"`
-	Id int `json:"id"`
-	Enabled int `json:"enabled"`
+	Id      int    `json:"id"`
+	Enabled int    `json:"enabled"`
 }
 
 ///////// Firmen
 type Firma struct {
-	Id   int `json:"id"`
-	Name string `json:"name"`
-	Enabled int `json:"enabled"`
+	Id      int    `json:"id"`
+	Name    string `json:"name"`
+	Enabled int    `json:"enabled"`
 }
 type Firmen struct {
-	Firmen   []Firma `json:"Firmen"`	
+	Firmen []Firma `json:"Firmen"`
 }
 
 type NewCompany struct {
 	Name string `json:"name"`
 }
 
-
-
 ////////// Abteilungen
 type Department struct {
-	Id   int `json:"id"`
-	Name string `json:"name"`
-	Firma   string `json:"firma"`
+	Id         int    `json:"id"`
+	Name       string `json:"name"`
+	Firma      string `json:"firma"`
 	NotifyMail string `json:"notifyMail"`
-	Enabled int `json:"enabled"`
+	Enabled    int    `json:"enabled"`
 }
 type Departments struct {
-	Departments   []Department `json:"Department"`	
+	Departments []Department `json:"Department"`
 }
 
 type NewDepartment struct {
-	NewDepName string `json:"newDepName"`
-	NewDepCompany   int `json:"newDepCompany"`
-	NewDepMail string `json:"newDepMail"`
+	NewDepName    string `json:"newDepName"`
+	NewDepCompany int    `json:"newDepCompany"`
+	NewDepMail    string `json:"newDepMail"`
 }
 
-type NewDeps struct {
-	NewDeps   []NewDepartment `json:"NewDepartment"`
+type NewDep struct {
+	Dep NewDepartment `json:"NewDepartment"`
 	//NewDeps   []string `json:"NewDepartment"`
+}
+
+type NewProc struct {
+	NewProcName string `json:"newProcessorName"`
+	NewProcMail string `json:"newProcessprMail"`
 }
