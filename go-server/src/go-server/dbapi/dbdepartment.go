@@ -105,7 +105,7 @@ func DBGetDepartments(w http.ResponseWriter, _appconfig *types.Configuration) er
 		Abteilungen.firmaId = Firmen.id`
 
 	utils.LogMsg(4, "DB Query: "+sql)
-
+ 
 	rows, err := db.Query(sql)
 	if err != nil {
 		utils.LogMsg(1, err.Error())

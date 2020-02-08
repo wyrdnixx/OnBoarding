@@ -51,10 +51,27 @@ type NewDepartment struct {
 
 type NewDep struct {
 	Dep NewDepartment `json:"NewDepartment"`
-	//NewDeps   []string `json:"NewDepartment"`
+}
+
+type Processors struct {
+Processors []Processor ` json:"Processor"`
+}
+
+type Processor struct {
+	Id         int    `json:"id"`
+	Name       string `json:"name"`
+	NotifyMail string `json:"notifyMail"`
+	Enabled    int    `json:"enabled"`
+}
+
+type NewProcessor struct {
+	NewProcessorName    string `json:"NewProcessorName"`	
+	NewProcessorMail    string `json:"NewProcessorMail"`
 }
 
 type NewProc struct {
-	NewProcName string `json:"newProcessorName"`
-	NewProcMail string `json:"newProcessprMail"`
+	Item NewProcessor `json:"NewProcessor"`
 }
+
+
+

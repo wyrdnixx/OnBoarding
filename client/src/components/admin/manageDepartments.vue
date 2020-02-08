@@ -5,8 +5,8 @@
         <!-- <h1> {{msg}} </h1> -->
 
         <section class="form">
-            <input class="form-control" v-model="newDepName" placeholder="Abteilung"/>
-            <input class="form-control" v-model="newDepMail" placeholder="Mail"/>
+            <input class="form-control" v-model="NewDepName" placeholder="Abteilung"/>
+            <input class="form-control" v-model="NewDepMail" placeholder="Mail"/>
             Firma, der die Abteilung zugehörig ist:
             <select
                 name="NewDepFirma"
@@ -37,7 +37,7 @@
                         <template v-if="dep.enabled === 1">
                             <td >{{dep.name}}</td>
                             <td>{{dep.firma}}</td>
-                            <td>{{dep.notifyMail}}</td>
+                            <td>{{dep.notifyMail}}</td>NewDepName
                             <td align="right">
                                 <button
                                     type="button"

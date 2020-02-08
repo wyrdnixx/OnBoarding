@@ -66,7 +66,7 @@ func main() {
 
 	AppConfig = utils.ReadConfig()
 
-	utils.LogMsg(3, " Api Server listening on :"+AppConfig.ApiPort)
+	utils.LogMsg(3, " Api Server listening on Port:"+AppConfig.ApiPort)
 	log.Fatal(http.ListenAndServe(AppConfig.ApiPort, nil))
 
 }

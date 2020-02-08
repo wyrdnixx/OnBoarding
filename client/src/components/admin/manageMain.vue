@@ -101,7 +101,11 @@ import axios from 'axios';
                         this.Abteilungen = _departmens
                     });
 
-                    
+                await DBService
+                    .DBGetProcessors()
+                    .then((_processors) => {
+                        this.Processors = _processors
+                    });
 
 
                 // const apiurlnew = window.location.protocol + "//"+ window.location.hostname +":5000/api/DBGetCompanys"

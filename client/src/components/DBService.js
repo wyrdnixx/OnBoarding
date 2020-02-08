@@ -70,7 +70,7 @@ class DBService {
   static DBAddProcessor(data){
     const callUrl = apiURL + "/Processors"
     return axios.post(callUrl, {
-      NewDepartment: data
+        NewProcessor: data
           }, {
             headers: {
                 'Content-Type': 'application/json',
@@ -78,7 +78,15 @@ class DBService {
           });
 }
   
+static DBGetProcessors() {        
+    const callUrl = apiURL + "/Processors"
+    return axios .get(callUrl) 
+        .then((response) =>  {
+            console.log(response.data)
+            return response.data.Processor
+        })
 
+}
 
 
 

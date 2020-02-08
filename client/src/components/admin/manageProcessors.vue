@@ -62,8 +62,8 @@
         components: {},
         data() {
             return {
-                NewProcessorName: null,
-                NewProcessorMail: null
+                newProcessorName: "",
+                newProcessorMail: ""
                 }
         },
         props: {
@@ -77,11 +77,11 @@
   
             async AddProcessor () {
                 const _NewProc = {
-                    newProcessorName: this.newProcessorName,
-                    newProcessorMail: this.newProcessorMail
+                    NewProcessorName: this.newProcessorName,
+                    NewProcessorMail: this.newProcessorMail
                 };
 
-                alert ("Name: " + this.newProcessorName)
+                //alert ("Name: " + _NewProc.NewProcessorName)
                 await DBService
                 .DBAddProcessor(_NewProc)
                 .then(() => this.$parent.updateAll())
@@ -91,25 +91,11 @@
                 })
                   .catch((error) => alert(("Server returned an Error:\n" + error.response.data)));
             },
-/*
-           AddProcessor() {
-                
-                DBService
-                .AddProcessor(
-                    this.newProcessorName,
-                    this.newProcessorMail
-                )
-                .then(() =>  this.$parent.updateAll())
-                .then (() => {
-                    this.newProcessorName = "",
-                    this.newProcessorMail = ""
-                })
-                .catch((error) => alert(error));                
-            },
-*/
+
             async toggleProcessors(id, enabled) {
-                await DBService.toggleEntry("Processors", id, enabled);
-                 this.$parent.updateAll()
+                await DBService.toggleEntry("Processors", id, enabled)
+                .then(() =>  this.$parent.updateAll())            
+                .catch((error) => alert(("Server returned an Error:\n" + error.response.data)));
             }
         }
 
