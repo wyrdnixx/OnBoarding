@@ -57,6 +57,8 @@ type Processors struct {
 Processors []Processor ` json:"Processor"`
 }
 
+//// Processors
+
 type Processor struct {
 	Id         int    `json:"id"`
 	Name       string `json:"name"`
