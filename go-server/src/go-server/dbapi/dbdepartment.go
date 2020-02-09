@@ -108,18 +108,18 @@ func DBGetDepartments(w http.ResponseWriter, _appconfig *types.Configuration) er
  
 	rows, err := db.Query(sql)
 	if err != nil {
-		utils.LogMsg(1, err.Error())
+		utils.LogMsg(1, "DBGetDepartments SQL-Query : " + err.Error())
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return err
-	}
+	} 
 
 	result := types.Departments{}
 	for rows.Next() {
-		dep := types.Department{}
+		dep := types.Department{}		
 		err = rows.Scan(&dep.Id, &dep.Name, &dep.Firma, &dep.NotifyMail, &dep.Enabled)
 
 		if err != nil {
-			utils.LogMsg(1, err.Error())
+			utils.LogMsg(1, "DBGetDepartments Rows.Scan : " + err.Error())
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 		result.Departments = append(result.Departments, dep)

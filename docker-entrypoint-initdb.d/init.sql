@@ -91,9 +91,10 @@ CREATE TABLE `Person_Abteilung_Status` (
 
 DROP TABLE IF EXISTS `Person_Item`;
 CREATE TABLE `Person_Item` (
-  `personId` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `itemId`  int(11) NOT NULL,  
-  `value` varchar(255) DEFAULT NULL  
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 );
 
 --
@@ -102,8 +103,8 @@ CREATE TABLE `Person_Item` (
 
 LOCK TABLES `Firmen` WRITE;
 /*!40000 ALTER TABLE `Firmen` DISABLE KEYS */;
-INSERT INTO `Firmen` (`id`, `name`, `enabled`) VALUES ('0', 'ALL', '1');
-INSERT INTO `Firmen` (`id`, `name`, `enabled`) VALUES ('1', 'MCB', '1');
+INSERT INTO `Firmen` (`name`, `enabled`) VALUES ('ALL', '1');
+INSERT INTO `Firmen` (`name`, `enabled`) VALUES ('MCB', '1');
 INSERT INTO `Firmen` (`name`, `enabled`) VALUES ('Klinikum FN','1');
 INSERT INTO `Firmen` (`name`, `enabled`) VALUES ('Klinik TET','1');
 /*!40000 ALTER TABLE `Firmen` ENABLE KEYS */;
@@ -111,9 +112,9 @@ UNLOCK TABLES;
 
 LOCK TABLES `Abteilungen` WRITE;
 /*!40000 ALTER TABLE `Abteilungen` DISABLE KEYS */;
-INSERT INTO `Abteilungen` (`id`,`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('0','ALL','0','jojo@ulewu.de','1');
-INSERT INTO `Abteilungen` (`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('Station 4','1','st4@ulewu.de','1');
-INSERT INTO `Abteilungen` (`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('MVZ I','1','mvz@ulewu.de','1');
+INSERT INTO `Abteilungen` (`id`,`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('1','ALL','1','jojo@ulewu.de','1');
+INSERT INTO `Abteilungen` (`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('Station 4','3','st4@ulewu.de','1');
+INSERT INTO `Abteilungen` (`name`,`FirmaId`,`notifyMail`,`enabled`) VALUES ('MVZ I','3','mvz@ulewu.de','1');
 /*!40000 ALTER TABLE `Abteilungen` ENABLE KEYS */;
 UNLOCK TABLES;
 

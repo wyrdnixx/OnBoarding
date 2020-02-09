@@ -37,7 +37,7 @@
                         <template v-if="dep.enabled === 1">
                             <td >{{dep.name}}</td>
                             <td>{{dep.firma}}</td>
-                            <td>{{dep.notifyMail}}</td>NewDepName
+                            <td>{{dep.notifyMail}}</td>
                             <td align="right">
                                 <button
                                     type="button"
@@ -98,9 +98,9 @@
                 if (!this.selected) 
                     this.selected = 0;
                 const _NewDep = {
-                    newDepName: this.newDepName,
+                    newDepName: this.NewDepName,
                     newDepCompany: this.selected,
-                    newDepMail: this.newDepMail
+                    newDepMail: this.NewDepMail
                 };
 
                 await DBService

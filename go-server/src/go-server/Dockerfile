@@ -14,4 +14,9 @@ RUN ["go", "get", "github.com/go-sql-driver/mysql"]
 ###
 
 
+#COPY ./docker-entrypoint-initdb.d/init.sql /entrypoint/
+#RUN ["chmod", "+x", "entrypoint/entrypoint.sh"]
+
+
+
 ENTRYPOINT CompileDaemon -log-prefix=false -build="go build ./src/go-server/" -command="./go-server"
