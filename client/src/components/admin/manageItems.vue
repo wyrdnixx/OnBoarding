@@ -8,10 +8,10 @@
             Abteilung, für die das Item verfügbar ist ( ALL = Alle Abteilungen):
             <select
                 name="NewItemDepartment"
-                v-model="selectedDepartment" 
-                 @click="this.$parent.updateAll()"               
+                v-model="selectedDepartment"                 
+                 @click="this.$parent.updateAll()"              
                 class="btn btn-secondary dropdown-toggle">
-                <!-- <option :value="comp.id">{{comp.id}} </option> -->
+                <!-- <option :value="comp.id">{{comp.id}} </option> -->                
                 <option v-for="dep in this.$parent.Abteilungen" v-bind:key="dep.id" :value="dep.id" v-if="dep.enabled===1">{{dep.name}}
                 </option>
             </select>
@@ -19,7 +19,7 @@
                 Bearbeitende Abteilung:
                 <select
                     name="NewItemProcessor"
-                    v-model="selectedProcessor"   
+                    v-model="selectedProcessor"                       
                      @click="this.$parent.updateAll()"                 
                     class="btn btn-secondary dropdown-toggle">
                     <!-- <option :value="comp.id">{{comp.id}} </option> -->
@@ -58,29 +58,29 @@
                                     </tr>
                                 </thead>
                                 <tbody >
-                                    <tr v-for="Item in this.$parent.Items" v-bind:key="Item.id">
-                                        <template v-if="Item.enabled === 1">
-                                            <td>{{Item.text}}</td>
-                                            <td>{{Item.depId}}</td>
-                                            <td>{{Item.procId}}</td>
-                                            <td>{{Item.type}}</td>
+                                    <tr v-for="item in this.$parent.Items" v-bind:key="item.id">
+                                        <template v-if="item.enabled === 1">
+                                            <td>{{item.Text}}</td>
+                                            <td>{{item.DepId}}</td>
+                                            <td>{{item.ProcessorId}}</td>
+                                            <td>{{item.ItemType}}</td>
                                             <td align="right">
                                                 <button
                                                     type="button"
                                                     class="btn-disable"
-                                                    @click='toggleItem(Item.id, Item.enabled)'>disable</button>
+                                                    @click='toggleItem(item.id, item.enabled)'>disable</button>
                                             </td>
                                         </template>
-                                        <template v-if="Item.enabled === 0">
-                                            <td class="disabledColumn">{{Item.text}}</td>
-                                            <td class="disabledColumn">{{Item.depId}}</td>
-                                            <td class="disabledColumn">{{Item.procId}}</td>
-                                            <td class="disabledColumn">{{Item.type}}</td>
+                                        <template v-if="item.enabled === 0">
+                                            <td class="disabledColumn">{{item.Text}}</td>
+                                            <td class="disabledColumn">{{item.DepId}}</td>
+                                            <td class="disabledColumn">{{item.ProcessorId}}</td>
+                                            <td class="disabledColumn">{{item.ItemType}}</td>
                                             <td class="disabledColumn" align="right">
                                                 <button
                                                     type="button"
                                                     class="btn-enable"
-                                                    @click='toggleItem(Item.id, Item.enabled)'>Enable</button>
+                                                    @click='toggleItem(item.id, item.enabled)'>Enable</button>
                                             </td>
                                         </template>
                                     </tr>
@@ -102,7 +102,7 @@
                     data() {
                         return {
 //                            Items: [],  
-                            newItemText: null,
+                            newItemText: "",
                          //   Abteilungen: [],
                           //  Processors: [],
                             selectedDepartment: "",
@@ -115,58 +115,12 @@
                         msg: String
                     },
                     created() {
-                        // this.updateAllData();
-                   //     console.log("in created bei Items")
-//this.$parent.updateAll()
+                        
                     },
                     methods: {
-                        // async updateAllData() {    
-                            // this.Items = await DBService.DBget("Items","all");
-                            // this.Abteilungen = await DBService.DBget("Abteilungen","all"); 
-                            // this.Processors = await DBService.DBget("Processors","all");
-
-                    //   async updateAllData() {
-                    //     // await    DBService
-                    //     //         .DBget("Items", "all")
-                    //     //         .then((_items) => {
-                    //     //             this.Items = _items
-                            
-                    //     //         });
-
-                    //     //  await   DBService
-                    //     //         .DBget("Firmen", "enabled")
-                    //     //         .then((_firmen) => {
-                    //     //             this.Firmen = _firmen
-                    //     //         });
-
-                    //     // await    DBService
-                    //     //         .DBget("Abteilungen", "all")
-                    //     //         .then((_abteilungen) => {
-                    //     //             this.Abteilungen = _abteilungen
-                    //     //         });
-                    //     // await    DBService
-                    //     //         .DBget("Processors", "all")
-                    //     //         .then((_processors) => {
-                    //     //             this.Processors = _processors
-                    //     //         });
-                    //     },
-                        // updateDepartments(){
-                        //     DBService
-                        //         .DBget("Abteilungen", "all")
-                        //         .then((_abteilungen) => {
-                        //             this.Abteilungen = _abteilungen
-                        //         });
-                        // },
-                        // updateProcessors() {
-                        //     DBService
-                        //         .DBget("Processors", "all")
-                        //         .then((_processors) => {
-                        //             this.Processors = _processors
-                        //         });
-                    //    },
-                        AddItem() {
+                       async AddItem() {
                             if (!this.selectedDepartment) 
-                                this.selectedDepartment = 0;
+                                this.selectedDepartment = 1;
                             
                             if (this.selectedType == "Choose") {
                                 this.selectedType = "Choose:" + this.newItemChooseOptions;
@@ -175,24 +129,28 @@
                             if (this.selectedType == "" || this.selectedProcessor == "") {
                                 alert("Error: no type or Processor choosen")
                             } else {
-                                DBService
-                                    .AddItem(
-                                        this.newItemText,
-                                        this.selectedDepartment,
-                                        this.selectedProcessor,
-                                        this.selectedType
-                                    )
-                                    .then(() => this.$parent.updateAll()) //this.updateAllData())
-                                    .then(() => {
-                                        this.newItemText = "";
-                                        this.selectedDepartment = "";
-                                        this.selectedProcessor = "";
-                                        this.selectedType = "";
-                                        this.newItemChooseOptions = "";
-                                    })
-                                    .catch((error) => alert(error));
-                            }
+                                
 
+                            const _NewItem = {
+                                newItemText: this.newItemText, 
+                                selectedDepartment: this.selectedDepartment,
+                                selectedProcessor: this.selectedProcessor,
+                                selectedType: this.selectedType,
+                                newItemChooseOptions: this.newItemChooseOptions
+                            };
+
+                            await DBService
+                                .DBAddItem(_NewItem)
+                                .then (() => this.$parent.updateAll())
+                                .then (() => {
+                                    this.newItemText = "";
+                                    this.selectedDepartment = "";
+                                    this.selectedProcessor = "";
+                                    this.selectedType = "";
+                                    this.newItemChooseOptions = "";
+                                })
+                                .catch((error) => alert(("Server returned an Error:\n" + error.response.data)));                                
+                            }
                         },
 
                         async toggleItem(id, enabled) {

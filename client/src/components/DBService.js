@@ -77,7 +77,8 @@ class DBService {
             }
           });
 }
-  
+ 
+
 static DBGetProcessors() {        
     const callUrl = apiURL + "/Processors"
     return axios .get(callUrl) 
@@ -88,7 +89,27 @@ static DBGetProcessors() {
 
 }
 
+static DBAddItem(data){
+    const callUrl = apiURL + "/Items"
+    return axios.post(callUrl, {
+        NewItem: data
+          }, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+          });
+}
 
+static DBGetItems() {  
+    console.log("DBGetItems")      
+    const callUrl = apiURL + "/Items"
+    return axios .get(callUrl) 
+        .then((response) =>  {
+            console.log(response.data)
+            return response.data.Item
+        })
+
+}
 
 ////////////////  -> OLD nodejs Server
 

@@ -106,6 +106,11 @@ import axios from 'axios';
                     .then((_processors) => {
                         this.Processors = _processors
                     });
+                await DBService
+                    .DBGetItems()
+                    .then((_items) => {
+                        this.Items = _items
+                    });
 
 
                 // const apiurlnew = window.location.protocol + "//"+ window.location.hostname +":5000/api/DBGetCompanys"

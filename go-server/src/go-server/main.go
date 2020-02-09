@@ -56,11 +56,19 @@ func processorsHandler(w http.ResponseWriter, req *http.Request) {
 	dbapi.ApiProcessorsHandler(w, req, &AppConfig)
 }
 
+func itemsHandler(w http.ResponseWriter, req *http.Request) {
+
+	utils.EnableCors(&w)
+	utils.LogMsg(3, "/api/Items was requested...")
+	dbapi.ApiItemsHandler(w, req, &AppConfig)
+}
+
 func main() {
 	http.HandleFunc("/", defaultHandler)
 	http.HandleFunc("/api/Companys", companysHandler)
 	http.HandleFunc("/api/Departments", departmentsHandler)
 	http.HandleFunc("/api/Processors", processorsHandler)
+	http.HandleFunc("/api/Items", itemsHandler)
 
 	http.HandleFunc("/api/toggle", toggleHandler)
 

@@ -46,7 +46,7 @@ export default {
     data() {
         return {
         //    Firmen:[],     -->    verschoben in $parent -> manageIndex            
-            newCompany: null,
+            newCompany: "",
             
         }        
     },

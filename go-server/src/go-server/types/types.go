@@ -75,5 +75,28 @@ type NewProc struct {
 	Item NewProcessor `json:"NewProcessor"`
 }
 
+type Items struct {
+	Items []Item ` json:"Item"`
+}
 
+type NewItem struct {
+	Id	int	`json:"id"`
+	ProcessorId	int	`json:"selectedProcessor"`
+	DepId	int	`json:"selectedDepartment"`
+	Text	string	`json:"newItemText"`
+	ItemType	string	`json:"selectedType"`	
+	Enabled	int	`json:"enabled"`
+}
 
+type NewITM struct {
+	Itm NewItem `json:"NewItem"`
+}
+
+type Item struct {
+	Id	int	`json:"id"`
+	ProcessorId	int	`json:"ProcessorId"`
+	DepId	int	`json:"DepId"`
+	Text	string	`json:"Text"`
+	ItemType	string	`json:"ItemType"`	
+	Enabled	int	`json:"enabled"`
+}

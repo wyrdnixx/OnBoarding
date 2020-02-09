@@ -58,7 +58,7 @@ CREATE TABLE `Items` (
   `text` varchar(255) DEFAULT NULL,  
   `type` varchar(255) DEFAULT NULL,  
   `enabled` int(1) NOT NULL,  
-  `depId` int(11) NOT NULL DEFAULT '0',  
+  `depId` int(11) NOT NULL DEFAULT '0',    
   PRIMARY KEY (`id`)
 );
 
@@ -120,7 +120,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `Items` WRITE;
 /*!40000 ALTER TABLE `Items` DISABLE KEYS */;
-INSERT INTO `Items` (`processorId`,`text`,`type`,`enabled`) VALUES ('1','Email Adresse anlegen','bool','1');
+INSERT INTO `Items` (`processorId`,`text`,`type`,`enabled`,`depId`) VALUES ('1','Email Adresse anlegen','bool','1','1');
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
