@@ -106,12 +106,16 @@ func DBGetItems(w http.ResponseWriter, _appconfig *types.Configuration) error {
 	defer db.Close()
 
 	sql := `SELECT Items.id as id,
-	Items.processorId as processorId, 
+	Processors.name as processorId, 
 	Items.text as text,
     Items.type as type,
     Items.enabled as enabled,
-    Items.depId as depId
-	FROM appdb.Items`
+    Abteilungen.name as depId
+	FROM appdb.Items
+	left join Abteilungen on Items.depId = Abteilungen.id
+    left join Processors on Items.processorId = Processors.id
+	
+	`
 
 	rows, err := db.Query(sql)
 		if err != nil {

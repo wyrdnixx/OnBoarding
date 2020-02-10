@@ -94,8 +94,8 @@ type NewITM struct {
 
 type Item struct {
 	Id	int	`json:"id"`
-	ProcessorId	int	`json:"ProcessorId"`
-	DepId	int	`json:"DepId"`
+	ProcessorId	string	`json:"ProcessorId"`
+	DepId	string	`json:"DepId"`
 	Text	string	`json:"Text"`
 	ItemType	string	`json:"ItemType"`	
 	Enabled	int	`json:"enabled"`

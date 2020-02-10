@@ -45,8 +45,8 @@
 
                     <br>
                         <button type="button" class="btn btn-success" @click='AddItem'>Item anlegen</button>
-
-                        <div class="entryRow form-group">
+                        <hr/>
+                        <div >
                             <table class="table  table-striped table-dark">
                                 <thead class="thead-dark">
                                     <tr>
@@ -165,6 +165,8 @@
 
             <!-- Add "scoped" attribute to limit CSS to this component only -->
             <style scoped="scoped">
+
+
                 div.container {
                     max-width: 90%;
 

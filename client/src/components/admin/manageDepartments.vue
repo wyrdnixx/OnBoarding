@@ -1,6 +1,6 @@
 <template>
 
-    <div class="manageDepartments">
+    <div >
 
         <!-- <h1> {{msg}} </h1> -->
 
@@ -23,6 +23,8 @@
 
             <button id="adfds" type="button" class="btn btn-success" @click='AddDepartment'>Abteilung anlegen</button>
 
+                        <hr/>
+                        
             <table class="table  table-striped table-dark">
                 <thead class="thead-dark">
                     <tr>

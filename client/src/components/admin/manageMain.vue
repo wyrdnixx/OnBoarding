@@ -1,38 +1,36 @@
 <template>
-    <div id="global page" style="background-color:rgb(179, 233, 255)">
+    <div id="global page" style="background-color:rgb(40, 40, 40)">
         <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
 
-        <!-- <div class="shadow-lg p-3 mb-5 bg-info rounded"
-        @click='MtoggleViewCompany'><h4>Firmen bearbeiten</h4></div> -->
-        <div class="shadow-lg p-3 mb5 hoverable" @click='MtoggleViewCompany'>
-            <h4>Firmen bearbeiten</h4>
-        </div>
+
+        <!-- Test neuer Navbar -->
+        
+    <!-- <div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
+
+        <div class="nav nav-tabs" >
+        <label class="btn btn-secondary" id="btnComp" v-bind:class="{active: NavLblIsActive}" @click='MtoggleViewCompany'>
+            Firmen bearbeiten
+        </label>
+        <label class="btn btn-secondary"  id="btnDep" @click='MtoggleViewDepartments'>
+            Abteilungen bearbeiten
+        </label>
+        <label class="btn btn-secondary"  id="btnProc" @click='MtoggleViewProcessors'>
+            Bearbeiter bearbeiten
+        </label>
+        <label class="btn btn-secondary" id="btnItem" @click='MtoggleViewItems'>
+            Items bearbeiten
+        </label>
+    </div>
+        
         <div v-show="toggleViewCompany">
             <ManageCompany msg="Firma bearbeiten"/>
         </div>
 
-        <div
-            class="shadow-lg p-3 mb5  rounded hoverable"
-            @click='MtoggleViewDepartments'>
-            <h4>Abteilungen bearbeiten</h4>
-        </div>
         <div v-show="toggleViewDepartments">
             <ManageDepartments msg="Abteilungen bearbeiten"/>
         </div>
-
-        <div
-            class="shadow-lg p-3 mb5  rounded hoverable"
-            @click='MtoggleViewProcessors'>
-            <h4>Bearbeiter bearbeiten</h4>
-        </div>
         <div v-show="toggleViewProcessors">
             <ManageProcessors msg="Bearbeiter bearbeiten"/>
-        </div>
-
-        <div
-            class="shadow-lg p-3 mb5  rounded hoverable"
-            @click='MtoggleViewItems'>
-            <h4>Items bearbeiten</h4>
         </div>
         <div v-show="toggleViewItems">
             <ManageItems msg="Items bearbeiten"/>
@@ -69,24 +67,59 @@ import axios from 'axios';
                 Firmen: [],
                 Abteilungen: [],
                 Processors: [],
-                Items: []
+                Items: [],
+
+                NavLblIsActive: false,
             }
         },
         methods: {
-            async MtoggleViewCompany() {
+            async MtoggleViewCompany() {                
                        this.updateAll()
-                this.toggleViewCompany = !this.toggleViewCompany;
+                this.toggleViewCompany = true;
+                this.toggleViewDepartments = false;
+                this.toggleViewItems = false;
+                this.toggleViewProcessors = false;
+                this.toggleButtons("btnComp");
             },
             async MtoggleViewDepartments() {
                 this.updateAll()
-                this.toggleViewDepartments = !this.toggleViewDepartments;
-            },
-            async MtoggleViewItems() {
-                this.toggleViewItems = !this.toggleViewItems;
+                this.toggleViewCompany = false;
+                this.toggleViewDepartments = true;
+                this.toggleViewItems = false;
+                this.toggleViewProcessors = false;
+                this.toggleButtons("btnDep");
             },
             async MtoggleViewProcessors() {
-                this.toggleViewProcessors = !this.toggleViewProcessors;
+                this.toggleViewCompany = false;
+                this.toggleViewDepartments = false;
+                this.toggleViewItems = false;
+                this.toggleViewProcessors = true;
+                this.toggleButtons("btnProc");
             },
+            async MtoggleViewItems() {
+                this.toggleViewCompany = false;
+                this.toggleViewDepartments = false;
+                this.toggleViewItems = true;
+                this.toggleViewProcessors = false;                
+                this.toggleButtons("btnItem");
+            },
+
+            async toggleButtons(_button){
+                var btnComp = document.getElementById("btnComp");
+                var btnDep = document.getElementById("btnDep");
+                var btnProc = document.getElementById("btnProc");                
+                var btnItem = document.getElementById("btnItem");
+                
+                btnComp.classList.remove("active");
+                btnDep.classList.remove("active");
+                btnProc.classList.remove("active");
+                btnItem.classList.remove("active");
+
+                var current = document.getElementById(_button);
+                current.classList.add("active");
+                
+            },
+
             async updateAll() {
                 console.log("updateAll() aus Main")
                 await DBService
@@ -152,23 +185,30 @@ import axios from 'axios';
     }
 </script>
 
-<style>
+<style >
     #app {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #153e66;
-        margin-top: 60px;
+        text-align: left;
+        color: #3793ee;        
+        margin-top: 1%;        
         background-color: rgb(99, 145, 247);
     }
 
+    div {
+        margin-top: 1%;
+    }
     td.disabledColumn {
         color: #2e2e2e;
         background-color: #696868;
     }
     div.hoverable:hover {
         color: #12406e;
+        
+    }
+    
+    input. {
         background-color: rgb(116, 156, 243);
     }
 </style>

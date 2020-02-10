@@ -1,5 +1,5 @@
 <template>
-    <div id="app">
+    <div id="app" style="background-color:rgb(40, 40, 40); padding-left: 3%; padding-right: 3%;" >
         <p>
             <!-- <router-link to="/foo">Foo</router-link>
             <router-link to="/bar">Bar</router-link> -->
@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style  scoped>
  
 
   td.disabledColumn {

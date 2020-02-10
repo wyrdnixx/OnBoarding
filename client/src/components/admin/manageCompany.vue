@@ -1,14 +1,14 @@
 <template>
 
-    <div class="ManageCompany">
+    <div >
         
    <!--     <h1> {{msg}} </h1> -->
               <section class="form">
             <input class="form-control" v-model="newCompany" placeholder="Firmen-Name"/>
             <button type="button" class="btn btn-success" @click='AddCompany'>Firma anlegen</button>
 
-            
-            <div class="entryRow form-group">
+                                    <hr/>
+            <div >
                 <table class="table  table-striped table-dark" >
                    <thead class="thead-dark">
                       <tr>

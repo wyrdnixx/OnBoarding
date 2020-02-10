@@ -1,6 +1,6 @@
 <template>
 
-    <div class="ManageProcessors">
+    <div >
 
         <!-- <h1> {{msg}} </h1> -->
         <section class="form">
@@ -13,8 +13,8 @@
                 v-model="newProcessorMail"
                 placeholder="Notify Email"/>
             <button type="button" class="btn btn-success" @click='AddProcessor'>Anlegen</button>
-
-            <div class="entryRow form-group">
+                        <hr/>
+            <div >
                 <table class="table  table-striped table-dark">
                     <thead class="thead-dark">
                         <tr>
