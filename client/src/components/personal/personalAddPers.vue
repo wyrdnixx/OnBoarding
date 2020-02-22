@@ -4,7 +4,14 @@
 
         <div>
             <span class="border border-success">
-                <h3>Personal manuell anlegen - Abteilungsauswahl muss noch auf ausgewählte Firma eingeschr. werden.</h3>
+                <h3>Personal manuell anlegen - Abteilungsauswahl muss noch auf ausgewählte Firma
+                    eingeschr. werden.</h3>
+
+                                    <li v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">Test: {{firma.name}}</li>
+                    
+
+
+
                 <table class="table">
 
                     <tbody>
@@ -16,9 +23,9 @@
                                     name="perComp"
                                     v-model="perComp"
                                     class="btn btn-secondary dropdown-toggle">
-                                    <!-- <option >Männlich</option>  <option >Weiblich</option> -->
-                                    <option v-for="comp in this.Firmen" v-bind:key="comp.id" :value="comp.id">{{comp.name}}
+                                    <option v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">{{firma.name}}
                                     </option>
+
                                 </select>
                             </td>
                             <td>Personalnummer:
@@ -32,9 +39,9 @@
                                         name="perAbt"
                                         v-model="perAbt"
                                         class="btn btn-secondary dropdown-toggle"
-                                         @click="this.filterDepartments()" >
-                                        <option v-for="dep in this.Abteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
-                                    </option>
+                                        @click="this.filterDepartments()">
+                                        <option v-for="dep in this.$parent.Abteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
+                                        </option>
                                     </select>
                                 </td>
                                 <td>Geschlecht:</td>
@@ -84,7 +91,8 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <button type="button" class="btn btn-success" @click='AddPersonal'>Personal anlegen</button>
+                                                  <!--  <button type="button" class="btn btn-success" @click='AddPersonal'>Personal anlegen</button> 
+                                                  -->
                                                 </span>
                                             </div>
                                             <br>
@@ -97,15 +105,13 @@
                                         </template>
 
                                         <script>
-                                        import DBService from '../DBService';
+                                            import DBService from '../DBService';
 
                                             export default {
                                                 name: 'personalMain',
                                                 components: {},
                                                 data() {
                                                     return {
-                                                        Firmen: [],
-                                                        Abteilungen: [],                
                                                         perComp: "",
                                                         perNr: "",
                                                         perAbt: "",
@@ -120,41 +126,18 @@
                                                         perBeruf: ""
                                                     }
                                                 },
-                                                 created() {
-                                                    this.updateAll();                                                    
-                                                },
-                                                methods: {
-                                                    async updateAll() {                                                        
-                                                        await DBService
-                                                            .DBget("Firmen", "enabled")
-                                                            .then((_firmen) => {
-                                                                this.Firmen = _firmen
-                                                            });
+                                                async created() {
 
-                                                        await DBService
-                                                            .DBget("Abteilungen", "enabled")
-                                                            .then((_abteilungen) => {
-                                                                this.Abteilungen = _abteilungen
-                                                            });
+                                                    this
+                                                        .$parent
+                                                        .updateAll()
+                                                        .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))                                                    
+                                                    
+
                                                     },
+                                                methods: {
 
-                                                    AddPersonal() {
-                                                        DBService
-                                                        .AddPersonal(                                                                                                                    
-                                                        this.perComp,
-                                                        this.perNr,
-                                                        this.perAbt,
-                                                        this.perSex,
-                                                        this.perTitle,
-                                                        this.perNachname,
-                                                        this.perVorname,
-                                                        this.perGebDat,
-                                                        this.perEintritt,
-                                                        this.perAustritt,
-                                                        this.perDienstart,
-                                                        this.perBeruf
-                                                        )
-                                                        .then(() => {
+                                                    ClearFields() {
                                                         this.perComp = "",
                                                         this.perNr = "",
                                                         this.perAbt = "",
@@ -167,14 +150,8 @@
                                                         this.perAustritt = "",
                                                         this.perDienstart = "",
                                                         this.perBeruf = ""
-                                                        })
-                                                        .then(this.updateAll())
-                                                        .catch((error) => alert(error));
                                                     },
-                                                    filterDepartments() {
-                                                        perComp
 
-                                                    }
                                                 }
                                             }
                                         </script>

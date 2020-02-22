@@ -62,7 +62,7 @@ export default {
     },
     methods: {
        async updateAll() {
-            await DBService
+  /*           await DBService
             // 'Range' wird bei Personal-Get nicht benötigt.
             // wurde aber der Einfachheit halber gelassen, da sonnst in der App ein 
             // extra DBGet gemacht werden müsste
@@ -70,7 +70,7 @@ export default {
             .then((_personal) => {
                 this.Personal = _personal
             })
-            .catch((error) => alert(error));
+            .catch((error) => alert(error)); */
         }
     }
 }

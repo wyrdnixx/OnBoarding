@@ -46,7 +46,7 @@
 
     import DBService from '../DBService';
 
-import axios from 'axios';
+//import axios from 'axios';
 
     export default {
         name: 'index',
@@ -145,41 +145,6 @@ import axios from 'axios';
                         this.Items = _items
                     });
 
-
-                // const apiurlnew = window.location.protocol + "//"+ window.location.hostname +":5000/api/DBGetCompanys"
-                // axios .get(apiurlnew) 
-                //     .then((response) =>  {
-                //         console.log(response.data)
-                //         this.Firmen = response.data.Firmen
-                //     })  
-
-                // await DBService
-                //     .DBgetCompanys()
-                //     .then((_firmen) => {
-                //         this.Firmen = _firmen
-                //     });
-
-                ///////////////////////////////////
-
-                // await DBService
-                //     .DBget("Abteilungen", "all")
-                //     .then((_abteilungen) => {
-                //         this.Abteilungen = _abteilungen
-                //     });
-
-                // await DBService
-                //     .DBget("Processors", "all")
-                //     .then((_processors) => {
-                //         this.Processors = _processors
-                //     });
-                // await DBService
-                //     .DBget("Items", "all")
-                //     .then((_items) => {
-                //         this.Items = _items
-
-                //     });
-
-                
             }
         }
     }
