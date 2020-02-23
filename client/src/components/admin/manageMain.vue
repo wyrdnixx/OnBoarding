@@ -150,30 +150,3 @@
     }
 </script>
 
-<style >
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: left;
-        color: #3793ee;        
-        margin-top: 1%;        
-        background-color: rgb(99, 145, 247);
-    }
-
-    div {
-        margin-top: 1%;
-    }
-    td.disabledColumn {
-        color: #2e2e2e;
-        background-color: #696868;
-    }
-    div.hoverable:hover {
-        color: #12406e;
-        
-    }
-    
-    input. {
-        background-color: rgb(116, 156, 243);
-    }
-</style>
