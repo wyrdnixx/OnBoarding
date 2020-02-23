@@ -8,7 +8,7 @@
                     eingeschr. werden.</h3>
 
                                     <!-- <li v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">Test: {{firma.name}}</li> -->
-                     <li v-for="abt in this.AvailableAbteilungen" v-bind:key="abt.id" >Test: {{abt.name}}</li> 
+                     <li v-for="abt in this.Tests" v-bind:key="abt.id" >Test: {{abt.name}}</li> 
 
 
 
@@ -36,13 +36,13 @@
                                 <td>Abteilung:
                                 </td>
                                 <td>
-                                    <select
+                              <!--      <select
                                         name="perAbt"
-                                        v-model="AvailableAbteilungen"
+                                        v-model="perAbt"
                                         class="btn btn-secondary dropdown-toggle">
                                         <option v-for="dep in this.AvailableAbteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
                                         </option>
-                                    </select>
+                                    </select> -->
                                 </td>
                                 <td>Geschlecht:</td>
                                 <td>
@@ -124,7 +124,8 @@
                                                         perAustritt: "",
                                                         perDienstart: "",
                                                         perBeruf: "",
-                                                        AvailableAbteilungen: []
+                                                        AvailableAbteilungen: "",
+                                                        Tests: []
                                                     }
                                                 },
                                                 async created() {
@@ -153,30 +154,43 @@
                                                         this.perBeruf = ""
                                                     },
                                                     filterDepartments() {
-                                                        //this.AvailableAbteilungen = this.$parent.Abteilungen
+                                                       this.AvailableAbteilungen = this.$parent.Abteilungen
                                                         
+                                                        this.Tests=[]
+
                                                         this
                                                         .$parent
                                                         .updateAll()
                                                         .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))                                                    
                                                     
-                                                        this.AvailableAbteilungen ="";
-
-                                                        console.log("Firmen: ")
+                                                        //this.AvailableAbteilungen ="";
+                                                        
                                                         console.log("Selected: " + this.perComp )
                                                         for (let [Sammlung, Abteilung] of Object.entries(this.$parent.Abteilungen)) {
                                                             
-
-                                                            console.log("current: " + Abteilung.firma)
+                                                            //console.log("current S: " + JSON.stringify(Sammlung) )
+                                                            //console.log("current A: " + JSON.stringify(Abteilung))
+                                                            console.log("Abteilung: " + Abteilung.name)
                                                             //delete this.AvailableAbteilungen[Abteilungen]
                                                           
-                                                              if (Abteilung.firma == this.perComp && Abteilung.enabled =="1") {
-                                                                  console.log("-->>> Adding: " + Abteilung.firma)
-                                                                  this.AvailableAbteilungen = this.AvailableAbteilungen + Abteilung.firma                                                                  
+                                                              if (!(Abteilung.firma == this.perComp)) {
+                                                                  console.log("-->>> Removing "+ Sammlung + ": " + Abteilung.firma + " because is not: " +this.perComp )
+                                                                  //this.AvailableAbteilungen = this.AvailableAbteilungen + Abteilung                                                                  
+                                                                //delete this.AvailableAbteilungen[Sammlung]
+                                                                this.AvailableAbteilungen.splice(0,1)
+
+                                                                this.Tests.push(Abteilung)
+
+                                                                
                                                               }                                                           
                                                             
                                                         }
-                                                     
+                                                   
+                                                     console.log("AvailableAbteilungen : " + JSON.stringify(this.AvailableAbteilungen))
+                                                     console.log("Tests : " + JSON.stringify(this.Tests))
+                                                   //  for (let [key, value] of Object.entries(this.AvailableAbteilungen)) {
+                                                     //    console.log(`key: ${key} : ${value}`)
+                                                     //}
                                                      
 
                                                         // alert(this.perComp)
