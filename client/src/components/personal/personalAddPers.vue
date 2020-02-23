@@ -22,7 +22,8 @@
                                 <select
                                     name="perComp"
                                     v-model="perComp"
-                                    class="btn btn-secondary dropdown-toggle">
+                                    class="btn btn-secondary dropdown-toggle"
+                                    @click="filterDepartments()">
                                     <option v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">{{firma.name}}
                                     </option>
 
@@ -38,9 +39,8 @@
                                     <select
                                         name="perAbt"
                                         v-model="perAbt"
-                                        class="btn btn-secondary dropdown-toggle"
-                                        @click="this.filterDepartments()">
-                                        <option v-for="dep in this.$parent.Abteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
+                                        class="btn btn-secondary dropdown-toggle">
+                                        <option v-for="dep in this.AvailableAbteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
                                         </option>
                                     </select>
                                 </td>
@@ -123,7 +123,8 @@
                                                         perEintritt: "",
                                                         perAustritt: "",
                                                         perDienstart: "",
-                                                        perBeruf: ""
+                                                        perBeruf: "",
+                                                        AvailableAbteilungen: []
                                                     }
                                                 },
                                                 async created() {
@@ -151,7 +152,21 @@
                                                         this.perDienstart = "",
                                                         this.perBeruf = ""
                                                     },
+                                                    filterDepartments() {
+                                                        this.AvailableAbteilungen = this.$parent.Abteilungen
+                                                        
+                                                        console.log("Firmen: ")
 
+                                                        for (let [key, value] of Object.entries(this.AvailableAbteilungen)) {
+                                                            
+                                                            for (let [key2, value2] of Object.entries(value)) {
+                                                              console.log(`${key2}: ${value2}`);
+                                                            }
+                                                        }
+
+                                                        // alert(this.perComp)
+
+                                                    }
                                                 }
                                             }
                                         </script>
