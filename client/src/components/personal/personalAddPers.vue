@@ -7,10 +7,10 @@
                 <h3>Personal manuell anlegen - Abteilungsauswahl muss noch auf ausgewählte Firma
                     eingeschr. werden.</h3>
 
-                                    <!-- <li v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">Test: {{firma.name}}</li> -->
-                     <li v-for="abt in this.Tests" v-bind:key="abt.id" >Test: {{abt.name}}</li> 
-
-
+                <!-- <li v-for="firma in this.$parent.Firmen" v-bind:key="firma.id">Test:
+                {{firma.name}}</li> -->
+                <li v-for="abt in this.AvailableAbteilungen" v-bind:key="abt.id">Test:
+                    {{abt.name}}</li>
 
                 <table class="table">
 
@@ -36,13 +36,9 @@
                                 <td>Abteilung:
                                 </td>
                                 <td>
-                              <!--      <select
-                                        name="perAbt"
-                                        v-model="perAbt"
-                                        class="btn btn-secondary dropdown-toggle">
-                                        <option v-for="dep in this.AvailableAbteilungen" v-bind:key="dep.id" :value="dep.id">{{dep.name}}
-                                        </option>
-                                    </select> -->
+                                    <!-- <select name="perAbt" v-model="perAbt" class="btn btn-secondary
+                                    dropdown-toggle"> <option v-for="dep in this.AvailableAbteilungen"
+                                    v-bind:key="dep.id" :value="dep.id">{{dep.name}} </option> </select> -->
                                 </td>
                                 <td>Geschlecht:</td>
                                 <td>
@@ -91,8 +87,8 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                  <!--  <button type="button" class="btn btn-success" @click='AddPersonal'>Personal anlegen</button> 
-                                                  -->
+                                                    <!-- <button type="button" class="btn btn-success" @click='AddPersonal'>Personal
+                                                    anlegen</button> -->
                                                 </span>
                                             </div>
                                             <br>
@@ -124,17 +120,15 @@
                                                         perAustritt: "",
                                                         perDienstart: "",
                                                         perBeruf: "",
-                                                        AvailableAbteilungen: "",
-                                                        Tests: []
+                                                        AvailableAbteilungen: []
                                                     }
                                                 },
                                                 async created() {
-
+                                                    console.log(JSON.stringify(this.$parent.Abteilungen), null, '    ');
                                                     this
                                                         .$parent
                                                         .updateAll()
-                                                        .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))                                                    
-                                                    
+                                                        .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))
 
                                                     },
                                                 methods: {
@@ -154,48 +148,41 @@
                                                         this.perBeruf = ""
                                                     },
                                                     filterDepartments() {
-                                                       this.AvailableAbteilungen = this.$parent.Abteilungen
-                                                        
-                                                        this.Tests=[]
+                                                        //his.AvailableAbteilungen = this.$parent.Abteilungen
 
                                                         this
-                                                        .$parent
-                                                        .updateAll()
-                                                        .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))                                                    
-                                                    
-                                                        //this.AvailableAbteilungen ="";
-                                                        
-                                                        console.log("Selected: " + this.perComp )
-                                                        for (let [Sammlung, Abteilung] of Object.entries(this.$parent.Abteilungen)) {
+                                                            .$parent
+                                                            .updateAll()
+                                                            .catch((error) => alert(("Server returned an Error:\n" + error.response.data)))
+
+                                                            this.AvailableAbteilungen =[];
                                                             
-                                                            //console.log("current S: " + JSON.stringify(Sammlung) )
-                                                            //console.log("current A: " + JSON.stringify(Abteilung))
-                                                            console.log("Abteilung: " + Abteilung.name)
-                                                            //delete this.AvailableAbteilungen[Abteilungen]
-                                                          
-                                                              if (!(Abteilung.firma == this.perComp)) {
-                                                                  console.log("-->>> Removing "+ Sammlung + ": " + Abteilung.firma + " because is not: " +this.perComp )
-                                                                  //this.AvailableAbteilungen = this.AvailableAbteilungen + Abteilung                                                                  
-                                                                //delete this.AvailableAbteilungen[Sammlung]
-                                                                this.AvailableAbteilungen.splice(0,1)
+                                                            // Info - Besser mal mit Lodash probieren
+                                                            this
+                                                            .$parent
+                                                            .Abteilungen
+                                                            .forEach((abt, index) => {
+                                                                console.log(JSON.stringify(abt))
+                                                                if (abt.enabled == 1) {
+                                                                    this
+                                                                        .AvailableAbteilungen
+                                                                        .push(abt)
+                                                                }
 
-                                                                this.Tests.push(Abteilung)
+                                                            });
 
-                                                                
-                                                              }                                                           
-                                                            
-                                                        }
-                                                   
-                                                     console.log("AvailableAbteilungen : " + JSON.stringify(this.AvailableAbteilungen))
-                                                     console.log("Tests : " + JSON.stringify(this.Tests))
-                                                   //  for (let [key, value] of Object.entries(this.AvailableAbteilungen)) {
-                                                     //    console.log(`key: ${key} : ${value}`)
-                                                     //}
-                                                     
+                                                        //console.log(this.AvailableAbteilungen)
+                                                        /*
+                                                        this.$parent.Abteilungen.forEach((abteilung, index) => {
+                                                            if (abteilung.enabled === 0) {
+                                                                this.$parent.Abteilungen.splice(index, 1);
+                                                            }
+                                                        });
+*/
 
-                                                        // alert(this.perComp)
+                                                        console.log("AvailableAbteilungen: " + JSON.stringify(this.AvailableAbteilungen))
 
-                                                    }
                                                 }
                                             }
+                                        }
                                         </script>

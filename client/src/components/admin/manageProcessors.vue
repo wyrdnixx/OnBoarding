@@ -1,70 +1,55 @@
 <template>
-
     <div >
-
         <!-- <h1> {{msg}} </h1> -->
         <section class="form">
             <table class="table  table-striped table-dark">
-                <thead class="thead-dark">
-                                                </thead>
-                    <tr>
-                        <td>
-                                                <input
+                <thead class="thead-dark"></thead>
+                <tr>
+                    <td>
+                        <input
                         class="form-control"
                         v-model="newProcessorName"
                         placeholder="Bearbeitende Abteilung"/>
-                        </td>
+                    </td>
                     <td>
-                    <input
+                        <input
                         class="form-control"
                         v-model="newProcessorMail"
                         placeholder="Notify Email"/>
                     </td>
-                    </tr>
-                    <button type="button" class="btn btn-success" @click='AddProcessor'>Anlegen</button>
-                    
+                </tr>
+                <button type="button" class="btn btn-success" @click='AddProcessor'>Anlegen</button>
             </table>
-                    <hr/>
-                    <div >
-                        <table class="table  table-striped table-dark">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Bearbeiter</th>
-
-                                    <th scope="col">Mail</th>
-                                    <th scope="col">(de-)aktivieren</th>
-                                </tr>
-                            </thead>
-                            <tbody >
-                                <tr v-for="processor in this.$parent.Processors" v-bind:key="processor.id">
-                                    <template v-if="processor.enabled === 1">
-                                        <td>{{processor.name}}</td>
-                                        <td>{{processor.notifyMail}}</td>
-                                        <td align="right">
-                                            <button
-                                                type="button"
-                                                class="btn-disable"
-                                                @click='toggleProcessors(processor.id, processor.enabled)'>disable</button>
-                                        </td>
-                                    </template>
-                                    <template v-if="processor.enabled === 0">
-                                        <td class="disabledColumn">{{processor.name}}</td>
-                                        <td class="disabledColumn">{{processor.notifyMail}}</td>
-                                        <td class="disabledColumn" align="right">
-                                            <button
-                                                type="button"
-                                                class="btn-enable"
-                                                @click='toggleProcessors(processor.id, processor.enabled)'>Enable</button>
-                                        </td>
-                                    </template>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
+            <hr/>
+            <div >
+                <table class="table table-striped table-dark">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Bearbeiter</th>
+                            <th scope="col">Mail</th>
+                            <th scope="col">(de-)aktivieren</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr v-for="processor in this.$parent.Processors"
+                            v-bind:key="processor.id"
+                            v-bind:class="{ 'rowdisabled': processor.enabled === 0 }">
+                            <td>{{processor.name}}</td>
+                            <td>{{processor.notifyMail}}</td>
+                            <td align="right">
+                                <button
+                                    type="button"
+                                    v-bind:class="{ 'btn-disable': processor.enabled === 1, 'btn-enable': processor.enabled === 0 }"
+                                    @click='toggleProcessors(processor.id, processor.enabled)'>{{ processor.enabled === 0 ? 'enable' : 'disable' }}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </template>
+        </section>
+
+    </div>
+</template>
 
         <script>
             import DBService from '../DBService';
@@ -162,7 +147,7 @@
                                       text-align: left;
                                       border: 1px solid black;
                                       border-collapse: collapse;
-                                           
+
                                     }
                                     th {
                                       padding: 5px;

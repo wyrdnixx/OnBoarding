@@ -19,9 +19,9 @@ export default {
 </script>
 
 <style>
- 
 
-  td.disabledColumn {
+
+  .rowdisabled > td {
     color:#757575;
     background-color: #353535;
   }
@@ -29,7 +29,7 @@ export default {
     color:#7881fa;
     background-color: #3f3e3e;
   }
-  
+
   div.hoverable:hover{
     color: #12406e;
     background-color: rgb(56, 115, 243);
@@ -41,16 +41,16 @@ export default {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         text-align: left;
-        color: #3793ee;        
-        margin-top: 1%;        
+        color: #3793ee;
+        margin-top: 1%;
         background-color: rgb(99, 145, 247);
     }
 
     div {
         margin-top: 1%;
     }
-  
-  
+
+
     input {
         background-color: rgb(116, 156, 243);
     }
