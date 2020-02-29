@@ -16,10 +16,26 @@
                         <th scope="col">(de-)aktivieren</th>
                       </tr>
                     </thead>
-                    <tbody >
+                    <tbody >                    
+                    <tr v-for="firma in this.$parent.Firmen"
+                        v-bind:key="firma.id"
+                        v-bind:class="{'rowdisabled' : firma.enabled === 0}">
+                        <td>{{firma.name}}</td> 
+                        <td><button 
+                        type="button"
+                        v-bind:class="{'btn-disable' : firma.enabled === 1, 'btn-enable': firma.enabled === 0}"
+                        @click='toggleCompay(firma.id, firma.enabled)'>
+                        {{firma.enabled === 1 ? 'Disable' : 'Enable'}}
+                            </button></td>                       
+                    </tr>
+
+                        
+
+
+<!-- 
                     <tr v-for="firma in this.$parent.Firmen" v-bind:key="firma.id"> 
                         <template v-if="firma.enabled === 1">
-                            <td>{{firma.name}}</td>                        
+                            
                             <td align = "right">    <button type="button" class="btn-disable" @click='toggleCompay(firma.id, firma.enabled)'>disable</button> </td>
                         </template>
                         <template v-if="firma.enabled === 0">
@@ -27,7 +43,7 @@
                             <td class="disabledColumn" align = "right">    <button type="button" class="btn-enable" @click='toggleCompay(firma.id, firma.enabled)'>Enable</button> </td>
                         </template>                        
                     </tr>
-                    </tbody>
+ -->                    </tbody>
                 </table>
             </div>
               </section>

@@ -10,7 +10,7 @@
 
     import PersonalAddPers from './personalAddPers.vue'
     import PersonalShowPers from './personalShowPers.vue'
-    import DBService from '../DBService';
+import DBService from '../DBService';
 
     export default {
         name: 'personalMain',

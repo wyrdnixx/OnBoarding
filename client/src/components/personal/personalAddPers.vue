@@ -36,9 +36,9 @@
                                 <td>Abteilung:
                                 </td>
                                 <td>
-                                    <!-- <select name="perAbt" v-model="perAbt" class="btn btn-secondary
+                                    <select name="perAbt" v-model="perAbt" class="btn btn-secondary
                                     dropdown-toggle"> <option v-for="dep in this.AvailableAbteilungen"
-                                    v-bind:key="dep.id" :value="dep.id">{{dep.name}} </option> </select> -->
+                                    v-bind:key="dep.id" :value="dep.id">{{dep.name}} </option> </select>
                                 </td>
                                 <td>Geschlecht:</td>
                                 <td>
@@ -164,7 +164,8 @@
                                                             .Abteilungen
                                                             .forEach((abt, index) => {
                                                                 console.log(JSON.stringify(abt))
-                                                                if (abt.enabled == 1) {
+                                                                console.log("Company: " +   this.perComp)
+                                                                if (abt.enabled == 1 && abt.firma == this.perComp) {
                                                                     this
                                                                         .AvailableAbteilungen
                                                                         .push(abt)
